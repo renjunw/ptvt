@@ -1,0 +1,25 @@
+#!/bin/sh
+
+
+
+#judgement for the first arg is a number or not 
+if [ "$1" -gt 0 ] 2>/dev/null;
+then
+  cur_content=`sed -n "$1p" ~/.pt.log`
+  if [ -d "$cur_content" ] #must double quotation marks
+  then 
+    echo "is a directory"
+    # print the dirctory structe using tree command
+    pt $cur_content        
+    #tree -C --dirsfirst $cur_content | cat -n | sed -n 's/\([0-9]*\)\t/[01;32m\1[00m\t/p'   
+  fi
+  if [ -f "$cur_content" ]
+  then 
+    #using vim to open the file
+    vim $cur_content
+  fi
+else
+  echo "\nERR:  the arg you input is not a number.\n"
+fi
+
+

@@ -1,0 +1,15 @@
+#!/bin/sh 
+
+
+tree -a -f -i --dirsfirst $1 >~/.pt.log 
+
+
+
+#########################################
+#-C option means colorful for tree command output;--dirsfirst means print directories first
+#cat -n  means print with line number
+#^[ character input useing "Ctrl-v ESC"
+#^[[01;32m is the green color control character;^[[00m is the end for color rending
+#\1 is the content of matched between \(...\) parentheses behand.
+tree -a -C --dirsfirst $1 | cat -n |sed -n 's/\([0-9]*\)\t/[01;32m\1[00m\t/p'   
+
